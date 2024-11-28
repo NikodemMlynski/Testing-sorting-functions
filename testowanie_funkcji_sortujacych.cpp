@@ -2,6 +2,7 @@
 #include <chrono>
 #include <fstream>
 #include <vector>
+#include <string>
 
 template <typename T>
 void bubbleSort_while_for_shorter(T arr[], int n) {
@@ -110,10 +111,10 @@ int* generateRandomArray(int n) {
     // Inicjalizacja generatora liczb losowych
     srand(time(nullptr));
 
-    // Alokacja pamiêci dla tablicy
+    // Alokacja pami?ci dla tablicy
     int* array = new int[n];
 
-    // Wype³nienie tablicy losowymi liczbami
+    // Wype?nienie tablicy losowymi liczbami
     for (int i = 0; i < n; i++) {
         array[i] = rand();
     }
@@ -168,7 +169,6 @@ int printSortingResult(SortFunction<T> sortFunction, T array[], int size) {
         std::cout << "Sorting failed" << std::endl;
     }
     return elapsed.count();
-
 }
 void writeResultsToFile(const std::string& filename, const std::vector<std::pair<std::string, int>>& results) {
     std::ofstream file(filename);
@@ -189,52 +189,56 @@ int main()
 {
 
     std::vector<std::pair<std::string, int>> results;
+    int testing_values[3] = {10, 500, 10000};
+    for (int i = 0; i < 3; i++) {
+        int size = testing_values[i];
+        int* intArray_for_for_index = generateRandomArray(size);
+        float* floatArray_for_for_index = generateFloatArrayFromIntArray(intArray_for_for_index, size);
+        int for_for_index_int_time = printSortingResult<int>(bubbleSort_for_for, intArray_for_for_index, size);
+        int for_for_index_float_time = printSortingResult<float>(bubbleSort_for_for, floatArray_for_for_index, size);
+        results.push_back({ "for_for_index_int_time, " + std::to_string(size) + " ", for_for_index_int_time});
+        results.push_back({ "for_for_index_float_time, " + std::to_string(size) + " ", for_for_index_float_time });
 
-    int size = 5000;
-    int* intArray_for_for_index = generateRandomArray(size);
-    float* floatArray_for_for_index = generateFloatArrayFromIntArray(intArray_for_for_index, size);
-    int for_for_index_int_time = printSortingResult<int>(bubbleSort_for_for, intArray_for_for_index, size);
-    int for_for_index_float_time =  printSortingResult<float>(bubbleSort_for_for, floatArray_for_for_index, size);
-    results.push_back({ "for_for_index_int_time", for_for_index_int_time });
-    results.push_back({ "for_for_index_float_time", for_for_index_float_time });
+        int* intArray_while_for_index = generateRandomArray(size);
+        float* floatArray_while_for_index = generateFloatArrayFromIntArray(intArray_while_for_index, size);
+        int while_for_index_int_time = printSortingResult<int>(bubbleSort_while_for, intArray_while_for_index, size);
+        int while_for_index_float_time = printSortingResult<float>(bubbleSort_while_for, floatArray_while_for_index, size);
+        results.push_back({ "while_for_index_int_time, " + std::to_string(size) + " ", while_for_index_int_time });
+        results.push_back({ "while_for_index_float_time, " + std::to_string(size) + " ", while_for_index_float_time });
 
-    int* intArray_while_for_index = generateRandomArray(size);
-    float* floatArray_while_for_index = generateFloatArrayFromIntArray(intArray_while_for_index, size);
-    int while_for_index_int_time = printSortingResult<int>(bubbleSort_while_for, intArray_while_for_index, size);
-    int while_for_index_float_time = printSortingResult<float>(bubbleSort_while_for, floatArray_while_for_index, size);
-    results.push_back({ "while_for_index_int_time", while_for_index_int_time });
-    results.push_back({ "while_for_index_float_time", while_for_index_float_time });
-
-    int* intArray_while_for_shorter_index = generateRandomArray(size);
-    float* floatArray_while_for_shorter_index = generateFloatArrayFromIntArray(intArray_while_for_shorter_index, size);
-    int while_for_shorter_index_int_time = printSortingResult<int>(bubbleSort_while_for_shorter, intArray_while_for_shorter_index, size);
-    int while_for_shorter_index_float_time = printSortingResult<float>(bubbleSort_while_for_shorter, floatArray_while_for_shorter_index, size);
-    results.push_back({ "while_for_shorter_index_int_time", while_for_shorter_index_int_time });
-    results.push_back({ "while_for_shorter_index_float_time", while_for_shorter_index_float_time });
-
-
-    int* intArray_for_for_indicator = generateRandomArray(size);
-    float* floatArray_for_for_indicator = generateFloatArrayFromIntArray(intArray_for_for_indicator, size);
-    int for_for_indicator_int_time = printSortingResult<int>(bubbleSort_for_for_indicator, intArray_for_for_indicator, size);
-    int for_for_indicator_float_time = printSortingResult<float>(bubbleSort_for_for_indicator, floatArray_for_for_indicator, size);
-    results.push_back({ "for_for_indicator_int_time", for_for_indicator_int_time });
-    results.push_back({ "for_for_indicator_float_time", for_for_indicator_float_time });
+        int* intArray_while_for_shorter_index = generateRandomArray(size);
+        float* floatArray_while_for_shorter_index = generateFloatArrayFromIntArray(intArray_while_for_shorter_index, size);
+        int while_for_shorter_index_int_time = printSortingResult<int>(bubbleSort_while_for_shorter, intArray_while_for_shorter_index, size);
+        int while_for_shorter_index_float_time = printSortingResult<float>(bubbleSort_while_for_shorter, floatArray_while_for_shorter_index, size);
+        results.push_back({ "while_for_shorter_index_int_time, " + std::to_string(size) + " ", while_for_shorter_index_int_time });
+        results.push_back({ "while_for_shorter_index_float_time, " + std::to_string(size) + " ", while_for_shorter_index_float_time });
 
 
-    int* intArray_while_for_indicator = generateRandomArray(size);
-    float* floatArray_while_for_indicator = generateFloatArrayFromIntArray(intArray_while_for_indicator, size);
-    int while_for_indicator_int_time = printSortingResult<int>(bubbleSort_while_for_indicator, intArray_while_for_indicator, size);
-    int while_for_indicator_float_time = printSortingResult<float>(bubbleSort_while_for_indicator, floatArray_while_for_indicator, size);
-    results.push_back({ "while_for_indicator_int_time", while_for_indicator_int_time });
-    results.push_back({ "while_for_indicator_float_time", while_for_indicator_float_time });
+        int* intArray_for_for_indicator = generateRandomArray(size);
+        float* floatArray_for_for_indicator = generateFloatArrayFromIntArray(intArray_for_for_indicator, size);
+        int for_for_indicator_int_time = printSortingResult<int>(bubbleSort_for_for_indicator, intArray_for_for_indicator, size);
+        int for_for_indicator_float_time = printSortingResult<float>(bubbleSort_for_for_indicator, floatArray_for_for_indicator, size);
+        results.push_back({ "for_for_indicator_int_time, " + std::to_string(size) + " ", for_for_indicator_int_time });
+        results.push_back({ "for_for_indicator_float_time," + std::to_string(size) + " ", for_for_indicator_float_time });
 
 
-    int* intArray_while_for_shorter_indicator = generateRandomArray(size);
-    float* floatArray_while_for_shorter_indicator = generateFloatArrayFromIntArray(intArray_while_for_shorter_indicator, size);
-    int while_for_shorter_indicator_int_time = printSortingResult<int>(bubbleSort_while_for_shorter_indicator, intArray_while_for_shorter_indicator, size);
-    int while_for_shorter_indicator_float_time = printSortingResult<float>(bubbleSort_while_for_shorter_indicator, floatArray_while_for_shorter_indicator, size);
-    results.push_back({ "while_for_shorter_indicator_int_time", while_for_shorter_indicator_int_time });
-    results.push_back({ "while_for_shorter_indicator_float_time", while_for_shorter_indicator_float_time });
+        int* intArray_while_for_indicator = generateRandomArray(size);
+        float* floatArray_while_for_indicator = generateFloatArrayFromIntArray(intArray_while_for_indicator, size);
+        int while_for_indicator_int_time = printSortingResult<int>(bubbleSort_while_for_indicator, intArray_while_for_indicator, size);
+        int while_for_indicator_float_time = printSortingResult<float>(bubbleSort_while_for_indicator, floatArray_while_for_indicator, size);
+        results.push_back({ "while_for_indicator_int_time," + std::to_string(size) + " ", while_for_indicator_int_time });
+        results.push_back({ "while_for_indicator_float_time, " + std::to_string(size) + " ", while_for_indicator_float_time });
+
+
+        int* intArray_while_for_shorter_indicator = generateRandomArray(size);
+        float* floatArray_while_for_shorter_indicator = generateFloatArrayFromIntArray(intArray_while_for_shorter_indicator, size);
+        int while_for_shorter_indicator_int_time = printSortingResult<int>(bubbleSort_while_for_shorter_indicator, intArray_while_for_shorter_indicator, size);
+        int while_for_shorter_indicator_float_time = printSortingResult<float>(bubbleSort_while_for_shorter_indicator, floatArray_while_for_shorter_indicator, size);
+        results.push_back({ "while_for_shorter_indicator_int_time, " + std::to_string(size) + " ", while_for_shorter_indicator_int_time });
+        results.push_back({ "while_for_shorter_indicator_float_time, " + std::to_string(size) + " ", while_for_shorter_indicator_float_time });
+    }
+
+    
 
     writeResultsToFile("sorting_results.txt", results);
 
